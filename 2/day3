@@ -1,0 +1,19 @@
+import pandas as pd
+raw = {
+    "product": ["Widget A", "Widget B", "Widget C"],
+    "price": ["$1,234.50", "$567.89", "$2,345.00"],
+    "quantity": [10, 5, None],
+}
+df = pd.DataFrame(raw)
+# 1) Clean 
+df["price"] = df["price"].apply(lambda x: float(x.replace("$", "").replace(",", "")))
+# 2) Fill
+df["quantity"] = df["quantity"].fillna(0)
+# 3) Create
+df["total"] = df["price"] * df["quantity"]
+# 4) Categorize price: low / med / high
+df["price_category"] = df["price"].apply(
+    lambda p: "low" if p < 1000 else ("med" if p < 2000 else "high")
+)
+
+print(df)

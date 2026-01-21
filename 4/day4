@@ -1,0 +1,102 @@
+students = {
+    "S001": {
+        "name": "Alice Chen",
+        "courses": {
+            "CS101": {"grade": 92, "credits": 3},
+            "MATH201": {"grade": 88, "credits": 4},
+            "AI301": {"grade": 95, "credits": 3},
+        },
+        "advisor": "Dr. Smith",
+    },
+    "S002": {
+        "name": "Bob Lee",
+        "courses": {
+            "CS101": {"grade": 85, "credits": 3},
+            "MATH201": {"grade": 90, "credits": 4},
+        },
+        "advisor": "Dr. Patel",
+    },
+}
+
+
+alice_ai301 = students["S001"]["courses"]["AI301"]["grade"]
+print("Alice AI301 grade:", alice_ai301)
+
+
+bob_courses = students["S002"]["courses"]
+
+total_points = sum(info["grade"] * info["credits"] for info in bob_courses.values())
+total_credits = sum(info["credits"] for info in bob_courses.values())
+bob_gpa = total_points / total_credits
+
+print("Bob GPA:", bob_gpa)
+
+
+students_in_cs101 = [
+    data["name"]
+    for data in students.values()
+    if "CS101" in data["courses"]
+]
+
+print("Students in CS101:", students_in_cs101)
+
+
+all_grades = []
+for s in students.values():
+    for course in s["courses"].values():
+        all_grades.append(course["grade"])
+
+avg_grade = sum(all_grades) / len(all_grades)
+print("Average grade:", avg_grade)
+
+def compute_gpa(course_dict):
+    pts = sum(c["grade"] * c["credits"] for c in course_dict.values())
+    cr = sum(c["credits"] for c in course_dict.values())
+    return pts / cr
+
+gpas = {s_id: compute_gpa(data["courses"]) for s_id, data in students.items()}
+top_student_id = max(gpas, key=gpas.get)
+top_student_name = students[top_student_id]["name"]
+
+print("Highest GPA:", top_student_name, gpas[top_student_id])
+
+alice_ai301 = students["S001"]["courses"]["AI301"]["grade"]
+print("Alice AI301 grade:", alice_ai301)
+
+bob_courses = students["S002"]["courses"]
+
+total_points = sum(info["grade"] * info["credits"] for info in bob_courses.values())
+total_credits = sum(info["credits"] for info in bob_courses.values())
+bob_gpa = total_points / total_credits
+
+print("Bob GPA:", bob_gpa)
+
+
+students_in_cs101 = [
+    data["name"]
+    for data in students.values()
+    if "CS101" in data["courses"]
+]
+
+print("Students in CS101:", students_in_cs101)
+
+
+all_grades = []
+for s in students.values():
+    for course in s["courses"].values():
+        all_grades.append(course["grade"])
+
+avg_grade = sum(all_grades) / len(all_grades)
+print("Average grade:", avg_grade)
+
+
+def compute_gpa(course_dict):
+    pts = sum(c["grade"] * c["credits"] for c in course_dict.values())
+    cr = sum(c["credits"] for c in course_dict.values())
+    return pts / cr
+
+gpas = {s_id: compute_gpa(data["courses"]) for s_id, data in students.items()}
+top_student_id = max(gpas, key=gpas.get)
+top_student_name = students[top_student_id]["name"]
+
+print("Highest GPA:", top_student_name, gpas[top_student_id])
