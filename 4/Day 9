@@ -1,0 +1,25 @@
+import numpy as np
+import pandas as pd
+
+raw = {
+    "age": ["25", "30", "unknown"],
+    "income": ["$50,000", "$60,000", None],
+    "signUp": ["2024-01-01", "01/05/2024", "not a date"],
+}
+df = pd.DataFrame(raw)
+
+# age
+df["age"] = pd.to_numeric(df["age"], errors="coerce").fillna(35).astype(int)
+
+# income
+df["income"] = (
+    df["income"]
+    .str.replace("[$,]", "", regex=True)
+    .astype(float)
+)
+
+# signUp
+df["signUp"] = pd.to_datetime(df["signUp"], errors="coerce", dayfirst=True)
+
+print(df)
+print(df.isna().sum())
